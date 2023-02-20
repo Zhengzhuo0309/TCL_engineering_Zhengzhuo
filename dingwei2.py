@@ -1,7 +1,7 @@
 import cv2
 
 # 读取图像并进行预处理
-img = cv2.imread("1.jpg")
+img = cv2.imread("data/53.jpg")
 gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 
 # 进行边缘检测

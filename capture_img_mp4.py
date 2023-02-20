@@ -20,7 +20,7 @@ while(cap.isOpened()):
     print("frame = ",frame)
 
 
-    frame = cv2.resize(frame, (1280,768))
+    frame = cv2.resize(frame, (1920,1080))
     print(frame.shape)
     cv2.imshow('frame',frame)
     cv2.imwrite("./data/{}.jpg".format(i), frame)
