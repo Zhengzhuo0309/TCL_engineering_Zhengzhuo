@@ -42,12 +42,13 @@ for contour in contours:
     area = cv2.contourArea(contour)
     x, y, w, h = cv2.boundingRect(contour)
     aspect_ratio = float(w)/h
-    if 10000< area < 1000000 and aspect_ratio > 1 and aspect_ratio < 1.8:
+    if 10000< area < 1000000 :
         screen_contours.append(contour)
 
 # 创建新的图像并绘制分割轮廓
 seg_img = np.zeros_like(img)
-cv2.drawContours(seg_img, screen_contours, -1, (255, 255, 255), -1)  # 将轮廓线条的宽度改为-1，绘制实心轮廓
+
+cv2.polylines(seg_img, screen_contours, isClosed=True, color=(255, 0, 0), thickness=3, lineType=cv2.LINE_AA)
 
 # 显示结果
 cv2.imshow('Segmented Image', seg_img)

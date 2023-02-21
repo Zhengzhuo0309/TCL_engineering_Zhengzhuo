@@ -42,14 +42,29 @@ for contour in contours:
     area = cv2.contourArea(contour)
     x, y, w, h = cv2.boundingRect(contour)
     aspect_ratio = float(w)/h
-    if 10000< area < 1000000 and aspect_ratio > 1 and aspect_ratio < 1.8:
+    if 10000< area < 1000000 :
         screen_contours.append(contour)
 
 # 创建新的图像并绘制分割轮廓
 seg_img = np.zeros_like(img)
-cv2.drawContours(seg_img, screen_contours, -1, (255, 255, 255), -1)  # 将轮廓线条的宽度改为-1，绘制实心轮廓
+for contour in screen_contours:
+    for point in contour:
+        pt = (point[0][0], point[0][1])
+        cv2.circle(seg_img, pt, 1, (255, 255, 255), 2)
+
+screen_contours = screen_contours[0]  # 获取第一个轮廓
+points = []  # 存储点的坐标
+
+for point in screen_contours:
+    x, y = point[0]
+    points.append((x, y))
+
+print(points)
 
 # 显示结果
 cv2.imshow('Segmented Image', seg_img)
 cv2.waitKey(0)
 cv2.destroyAllWindows()
+
+
+
